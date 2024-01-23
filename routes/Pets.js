@@ -3,12 +3,13 @@ const router = express.Router();
 const {Pets} = require('../models');
 
 
-
+//retorna lista de todos os pets
 router.get('/', async (req, res)=>{
    const listOfPets = await Pets.findAll();
    res.json(listOfPets);
 });
 
+//retorna pet por id
 router.get('/:id', async (req, res)=>{
     const id = req.params.id;
     const pet = await Pets.findByPk(id);
@@ -47,7 +48,6 @@ router.post("/delete/:id", async (req, res)=>{
     const pet = await Pets.findByPk(id);
 
     await pet.destroy();
-    
 
 });
 
@@ -66,7 +66,8 @@ router.post("/adopted/:id", async (req, res)=>{
     pet.adoptionDate = dataUs;
     await pet.save();
 
-    res.json(pet);
+    res.send(dataUs);
+
     
 
 });
