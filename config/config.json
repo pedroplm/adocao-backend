@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "dev123456",
+    "password": "SUA SENHA",
     "database": "ongadocao",
     "host": "127.0.0.1",
     "dialect": "mysql"
