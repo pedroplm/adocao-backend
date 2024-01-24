@@ -58,8 +58,8 @@ router.post("/adopted/:id", async (req, res)=>{
     const pet = await Pets.findByPk(id);
 
 
-    const timeElapsed = Date.now();
-    const today = new Date(timeElapsed);
+    const time = Date.now();
+    const today = new Date(time);
     let dataBr = today.toLocaleDateString();
     let dataUs = dataBr.split('/').reverse().join('-');
    

@@ -21,9 +21,7 @@ module.exports = (sequelize, DataTypes)=>{
             type: DataTypes.STRING,
             allowNull: false,
         },
-        // setting allowNull to false will add NOT NULL to the column, which means an error will be
-        // thrown from the DB when the query is executed if the column is null. If you want to check that a value
-        // is not null before querying the DB, look at the validations section below.
+        //permitido null
         adoptionDate: {
             type: DataTypes.DATEONLY,
             allowNull: true,
