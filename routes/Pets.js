@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const {Pets} = require('../models');
+const {validateToken} = require('../middlewares/AuthMiddleware')
 
 
 //retorna lista de todos os pets
-router.get('/', async (req, res)=>{
+router.get('/', validateToken, async (req, res)=>{
    const listOfPets = await Pets.findAll();
    res.json(listOfPets);
 });
@@ -18,7 +19,7 @@ router.get('/:id', async (req, res)=>{
 
 
 //criar
-router.post("/", async (req, res)=>{
+router.post("/", validateToken, async (req, res)=>{
     //necessario receber em json seguinte formato: {NAME:STRING, AGE:INTERGER, SPECIES:STRING, RACE:STRING, ADOPTIONDATE:DATE or null}
     const pet = req.body;
 
@@ -41,18 +42,15 @@ router.post("/edit/:id", async (req, res)=>{
 });
 
 //deletar
-router.post("/delete/:id", async (req, res)=>{
-    //necessario receber em json seguinte formato: {NAME:STRING, AGE:INTERGER, SPECIES:STRING, RACE:STRING, ADOPTIONDATE:DATE or null}
+router.delete('/:id', validateToken, async(req, res)=>{
     const id = req.params.id;
-
     const pet = await Pets.findByPk(id);
 
     await pet.destroy();
-
-});
+})
 
 //adotado
-router.post("/adopted/:id", async (req, res)=>{
+router.post("/adopted/:id", validateToken, async (req, res)=>{
     //necessario receber em json seguinte formato: {NAME:STRING, AGE:INTERGER, SPECIES:STRING, RACE:STRING, ADOPTIONDATE:DATE or null}
     const id = req.params.id;
     const pet = await Pets.findByPk(id);

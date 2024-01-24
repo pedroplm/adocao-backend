@@ -15,6 +15,9 @@ const db = require("./models");
 const petsRouter = require('./routes/Pets')
 app.use("/pets", petsRouter);
 
+const usersRouter = require('./routes/Users')
+app.use("/users", usersRouter);
+
 
 db.sequelize.sync().then(()=>{
     app.listen(port, ()=>{
